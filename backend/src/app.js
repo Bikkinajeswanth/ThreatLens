@@ -36,7 +36,6 @@ if (allowedOrigins.includes(origin)) {
   return callback(null, true);
 }
 
-// ✅ FIXED (NO TEMPLATE STRING)
 console.warn("Blocked by CORS: " + origin);
 return callback(null, false);
 ```
@@ -45,8 +44,7 @@ return callback(null, false);
 credentials: true
 }));
 
-// ✅ HANDLE PREFLIGHT REQUESTS
-app.options('*', cors());
+// ❌ REMOVED app.options('*', cors());
 
 app.use(morgan('dev'));
 
