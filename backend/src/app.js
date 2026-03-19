@@ -36,8 +36,8 @@ if (allowedOrigins.includes(origin)) {
   return callback(null, true);
 }
 
-// 🔥 Don't throw error — just block silently
-console.warn(`Blocked by CORS: ${origin}`);
+// ✅ FIXED (NO TEMPLATE STRING)
+console.warn("Blocked by CORS: " + origin);
 return callback(null, false);
 ```
 
@@ -45,7 +45,7 @@ return callback(null, false);
 credentials: true
 }));
 
-// ✅ HANDLE PREFLIGHT REQUESTS (VERY IMPORTANT)
+// ✅ HANDLE PREFLIGHT REQUESTS
 app.options('*', cors());
 
 app.use(morgan('dev'));
@@ -64,7 +64,7 @@ res.status(200).json({ status: 'ok' });
 });
 
 // --------------------
-// Root route (optional)
+// Root route
 // --------------------
 app.get('/', (req, res) => {
 res.send('ThreatLens API is running 🚀');
