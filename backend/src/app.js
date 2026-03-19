@@ -17,10 +17,32 @@ connectDB();
 // Security middleware
 // --------------------
 app.use(helmet());
+
+// ✅ FIXED CORS CONFIG (IMPORTANT)
+const allowedOrigins = [
+'http://localhost:5173',
+'http://localhost:5174',
+'http://localhost:5175',
+'https://threat-lens-umber.vercel.app'
+];
+
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:5175'],
-  credentials: true
+origin: function (origin, callback) {
+// allow requests with no origin (like Postman or mobile apps)
+if (!origin) return callback(null, true);
+
+```
+if (allowedOrigins.includes(origin)) {
+  callback(null, true);
+} else {
+  callback(new Error('Not allowed by CORS'));
+}
+```
+
+},
+credentials: true
 }));
+
 app.use(morgan('dev'));
 
 // --------------------
@@ -33,7 +55,14 @@ app.use(express.urlencoded({ extended: true }));
 // Health check
 // --------------------
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok' });
+res.status(200).json({ status: 'ok' });
+});
+
+// --------------------
+// Root route (optional)
+// --------------------
+app.get('/', (req, res) => {
+res.send('ThreatLens API is running 🚀');
 });
 
 // --------------------
@@ -42,16 +71,15 @@ app.get('/health', (req, res) => {
 app.use('/api', routes);
 
 // --------------------
-// 404 handler (IMPORTANT)
+// 404 handler
 // --------------------
 app.use((req, res, next) => {
-  res.status(404);
-  next(new Error('API route not found'));
+res.status(404);
+next(new Error('API route not found'));
 });
 
 // --------------------
 // Global error handler
-// MUST have 4 arguments
 // --------------------
 app.use(errorHandler);
 
