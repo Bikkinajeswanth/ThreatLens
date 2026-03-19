@@ -27,21 +27,27 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-origin: function (origin, callback) {
-// allow requests with no origin (Postman, mobile apps)
-if (!origin) return callback(null, true);
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
 
-```
-if (allowedOrigins.includes(origin)) {
-  return callback(null, true);
-}
+    // allow localhost
+    if (
+      origin === 'http://localhost:5173' ||
+      origin === 'http://localhost:5174' ||
+      origin === 'http://localhost:5175'
+    ) {
+      return callback(null, true);
+    }
 
-console.warn("Blocked by CORS: " + origin);
-return callback(null, false);
-```
+    // ✅ allow ALL Vercel domains
+    if (origin.includes('vercel.app')) {
+      return callback(null, true);
+    }
 
-},
-credentials: true
+    console.warn("Blocked by CORS: " + origin);
+    return callback(null, false);
+  },
+  credentials: true
 }));
 
 // ❌ REMOVED app.options('*', cors());
