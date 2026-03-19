@@ -1,0 +1,260 @@
+/* Import design tokens — MUST be first, before @tailwind directives */
+@import './theme.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    transition:
+      background-color 0.2s ease,
+      color            0.2s ease;
+  }
+
+  /* Smooth token transitions on every element so theme switch animates fully */
+  *, *::before, *::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+  }
+
+  /* Reset transition for elements where animation would be jarring */
+  [class*="animate-"], [class*="spin"] {
+    transition: none;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
+}
+
+/* ── Components ───────────────────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply px-4 py-2 rounded-lg font-medium transition-all
+           inline-flex items-center justify-center gap-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--accent);
+    color: #ffffff;
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--accent-hover);
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 rounded-lg font-medium transition-all
+           inline-flex items-center justify-center gap-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--border-color);
+  }
+
+  .btn-danger {
+    @apply px-4 py-2 rounded-lg font-medium transition-all
+           inline-flex items-center justify-center gap-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--sev-critical);
+    color: #ffffff;
+  }
+  .btn-danger:hover:not(:disabled) {
+    filter: brightness(0.9);
+  }
+
+  /* ── Card ── */
+  .card {
+    @apply rounded-xl p-6 transition-colors;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  /* ── Input ── */
+  .input-field {
+    @apply w-full px-3 py-2 rounded-lg transition-colors
+           focus:outline-none focus:ring-2 focus:ring-offset-0;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    color: var(--input-text);
+    focus-ring-color: var(--input-focus-ring);
+  }
+  .input-field::placeholder {
+    color: var(--input-placeholder);
+  }
+  .input-field:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  /* ── Severity badges ── */
+  .badge-critical {
+    @apply px-2 py-0.5 text-xs rounded font-semibold;
+    background-color: var(--sev-critical-bg);
+    color: var(--sev-critical-text);
+    border: 1px solid var(--sev-critical-border);
+  }
+  .badge-high {
+    @apply px-2 py-0.5 text-xs rounded font-semibold;
+    background-color: var(--sev-high-bg);
+    color: var(--sev-high-text);
+    border: 1px solid var(--sev-high-border);
+  }
+  .badge-medium {
+    @apply px-2 py-0.5 text-xs rounded font-semibold;
+    background-color: var(--sev-medium-bg);
+    color: var(--sev-medium-text);
+    border: 1px solid var(--sev-medium-border);
+  }
+  .badge-low {
+    @apply px-2 py-0.5 text-xs rounded font-semibold;
+    background-color: var(--sev-low-bg);
+    color: var(--sev-low-text);
+    border: 1px solid var(--sev-low-border);
+  }
+  .badge-info {
+    @apply px-2 py-0.5 text-xs rounded font-semibold;
+    background-color: var(--sev-info-bg);
+    color: var(--sev-info-text);
+    border: 1px solid var(--sev-info-border);
+  }
+
+  /* ── Status badges ── */
+  .status-completed {
+    @apply px-2 py-0.5 text-xs rounded-full font-medium;
+    background-color: var(--status-completed-bg);
+    color: var(--status-completed-text);
+  }
+  .status-running {
+    @apply px-2 py-0.5 text-xs rounded-full font-medium;
+    background-color: var(--status-running-bg);
+    color: var(--status-running-text);
+  }
+  .status-failed {
+    @apply px-2 py-0.5 text-xs rounded-full font-medium;
+    background-color: var(--status-failed-bg);
+    color: var(--status-failed-text);
+  }
+  .status-pending {
+    @apply px-2 py-0.5 text-xs rounded-full font-medium;
+    background-color: var(--status-pending-bg);
+    color: var(--status-pending-text);
+  }
+
+  /* ── Skeleton loader ── */
+  .skeleton {
+    @apply animate-pulse rounded;
+    background-color: var(--skeleton-bg);
+  }
+
+  /* ── Nav link ── */
+  .nav-link {
+    @apply inline-flex items-center gap-2 px-3 py-2 border-b-2
+           text-sm font-medium transition-colors;
+  }
+  .nav-link-active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .nav-link-inactive {
+    border-color: transparent;
+    color: var(--nav-text);
+  }
+  .nav-link-inactive:hover {
+    color: var(--text-primary);
+    background-color: var(--nav-hover-bg);
+    border-radius: 0.375rem;
+  }
+
+  /* ── Table ── */
+  .th {
+    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider;
+    color: var(--text-muted);
+    background-color: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+  }
+  .td {
+    @apply px-4 py-3 text-sm;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .tr-hover:hover {
+    background-color: var(--bg-tertiary);
+  }
+
+  /* ── Alert / banner ── */
+  .alert-error {
+    @apply px-4 py-3 rounded-lg text-sm;
+    background-color: var(--sev-critical-bg);
+    color: var(--sev-critical-text);
+    border: 1px solid var(--sev-critical-border);
+  }
+  .alert-success {
+    @apply px-4 py-3 rounded-lg text-sm;
+    background-color: var(--sev-low-bg);
+    color: var(--sev-low-text);
+    border: 1px solid var(--sev-low-border);
+  }
+  .alert-info {
+    @apply px-4 py-3 rounded-lg text-sm;
+    background-color: var(--accent-subtle);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+
+  /* ── Section label ── */
+  .label {
+    @apply text-xs font-semibold uppercase tracking-wider;
+    color: var(--text-muted);
+  }
+
+  /* ── Page heading ── */
+  .page-title {
+    @apply text-2xl font-bold;
+    color: var(--text-primary);
+  }
+  .page-subtitle {
+    @apply text-sm mt-1;
+    color: var(--text-muted);
+  }
+}
+
+/* ── Input visibility — outside @layer so cascade always wins ─────────────── */
+input, textarea, select {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  caret-color: var(--input-text);
+}
+input:focus, input:active,
+textarea:focus, textarea:active,
+select:focus {
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  caret-color: var(--input-text);
+}
+input::placeholder, textarea::placeholder {
+  color: var(--input-placeholder);
+  opacity: 1;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--input-text);
+  -webkit-box-shadow: 0 0 0px 1000px var(--input-bg) inset;
+  caret-color: var(--input-text);
+}

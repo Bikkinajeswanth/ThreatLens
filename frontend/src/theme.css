@@ -1,0 +1,196 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ThreatLens — Design Token System
+   All colours are defined here as CSS custom properties.
+   Components reference var(--*) exclusively — no hardcoded hex values.
+───────────────────────────────────────────────────────────────────────────── */
+
+/* ── DARK THEME (default) ─────────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-primary:      #0b1120;   /* page background          */
+  --bg-secondary:    #1e293b;   /* card / panel background  */
+  --bg-tertiary:     #263348;   /* row hover / input bg     */
+  --bg-elevated:     #1e293b;   /* modals, dropdowns        */
+
+  /* Borders */
+  --border-color:    #334155;
+  --border-subtle:   #1e293b;
+
+  /* Text */
+  --text-primary:    #e2e8f0;   /* headings, strong content */
+  --text-secondary:  #cbd5e1;   /* body text                */
+  --text-muted:      #94a3b8;   /* labels, captions         */
+  --text-faint:      #64748b;   /* placeholders, disabled   */
+
+  /* Accent / brand */
+  --accent:          #3b82f6;   /* primary blue             */
+  --accent-hover:    #2563eb;
+  --accent-subtle:   rgba(59,130,246,0.12);
+  --accent-glow:     rgba(59,130,246,0.25);
+
+  /* Navbar */
+  --nav-bg:          #0f1929;
+  --nav-border:      #1e2d42;
+  --nav-text:        #94a3b8;
+  --nav-text-active: #60a5fa;
+  --nav-hover-bg:    #1e293b;
+
+  /* Severity — consistent across both themes */
+  --sev-critical:    #ef4444;
+  --sev-critical-bg: rgba(239,68,68,0.12);
+  --sev-critical-border: rgba(239,68,68,0.35);
+  --sev-critical-text:   #fca5a5;
+
+  --sev-high:        #f97316;
+  --sev-high-bg:     rgba(249,115,22,0.12);
+  --sev-high-border: rgba(249,115,22,0.35);
+  --sev-high-text:   #fdba74;
+
+  --sev-medium:      #f59e0b;
+  --sev-medium-bg:   rgba(245,158,11,0.12);
+  --sev-medium-border: rgba(245,158,11,0.35);
+  --sev-medium-text:   #fcd34d;
+
+  --sev-low:         #22c55e;
+  --sev-low-bg:      rgba(34,197,94,0.12);
+  --sev-low-border:  rgba(34,197,94,0.35);
+  --sev-low-text:    #86efac;
+
+  --sev-info:        #64748b;
+  --sev-info-bg:     rgba(100,116,139,0.12);
+  --sev-info-border: rgba(100,116,139,0.35);
+  --sev-info-text:   #cbd5e1;
+
+  /* Status badges */
+  --status-completed-bg:   rgba(34,197,94,0.12);
+  --status-completed-text: #86efac;
+  --status-running-bg:     rgba(245,158,11,0.12);
+  --status-running-text:   #fcd34d;
+  --status-failed-bg:      rgba(239,68,68,0.12);
+  --status-failed-text:    #fca5a5;
+  --status-pending-bg:     rgba(100,116,139,0.12);
+  --status-pending-text:   #94a3b8;
+
+  /* Charts */
+  --chart-grid:      #334155;
+  --chart-tick:      #94a3b8;
+  --chart-tooltip-bg:     #1e293b;
+  --chart-tooltip-border: #334155;
+  --chart-tooltip-text:   #f1f5f9;
+  --chart-tooltip-item:   #94a3b8;
+
+  /* Inputs */
+  --input-bg:        #162032;
+  --input-border:    #334155;
+  --input-text:      #e2e8f0;
+  --input-placeholder: #64748b;
+  --input-focus-ring: #3b82f6;
+
+  /* Skeleton */
+  --skeleton-bg:     #263348;
+
+  /* Scrollbar */
+  --scrollbar-track: #0f1929;
+  --scrollbar-thumb: #334155;
+
+  /* Card shadow */
+  --card-shadow:     0 4px 24px rgba(0,0,0,0.4);
+  --card-shadow-hover: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+/* ── LIGHT THEME ──────────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary:      #f1f5f9;
+  --bg-secondary:    #ffffff;
+  --bg-tertiary:     #f8fafc;
+  --bg-elevated:     #ffffff;
+
+  /* Borders */
+  --border-color:    #e2e8f0;
+  --border-subtle:   #f1f5f9;
+
+  /* Text */
+  --text-primary:    #0f172a;
+  --text-secondary:  #1e293b;
+  --text-muted:      #475569;
+  --text-faint:      #94a3b8;
+
+  /* Accent */
+  --accent:          #2563eb;
+  --accent-hover:    #1d4ed8;
+  --accent-subtle:   #dbeafe;
+
+  /* Navbar */
+  --nav-bg:          #ffffff;
+  --nav-border:      #e2e8f0;
+  --nav-text:        #64748b;
+  --nav-text-active: #2563eb;
+  --nav-hover-bg:    #f1f5f9;
+
+  /* Severity — slightly adjusted for light backgrounds */
+  --sev-critical:    #dc2626;
+  --sev-critical-bg: #fee2e2;
+  --sev-critical-border: #fca5a5;
+  --sev-critical-text:   #991b1b;
+
+  --sev-high:        #ea580c;
+  --sev-high-bg:     #ffedd5;
+  --sev-high-border: #fdba74;
+  --sev-high-text:   #9a3412;
+
+  --sev-medium:      #d97706;
+  --sev-medium-bg:   #fef3c7;
+  --sev-medium-border: #fcd34d;
+  --sev-medium-text:   #92400e;
+
+  --sev-low:         #16a34a;
+  --sev-low-bg:      #dcfce7;
+  --sev-low-border:  #86efac;
+  --sev-low-text:    #166534;
+
+  --sev-info:        #6b7280;
+  --sev-info-bg:     #f3f4f6;
+  --sev-info-border: #d1d5db;
+  --sev-info-text:   #374151;
+
+  /* Status badges */
+  --status-completed-bg:   #dcfce7;
+  --status-completed-text: #166534;
+  --status-running-bg:     #fef3c7;
+  --status-running-text:   #92400e;
+  --status-failed-bg:      #fee2e2;
+  --status-failed-text:    #991b1b;
+  --status-pending-bg:     #f3f4f6;
+  --status-pending-text:   #6b7280;
+
+  /* Charts */
+  --chart-grid:      #e2e8f0;
+  --chart-tick:      #64748b;
+  --chart-tooltip-bg:     #ffffff;
+  --chart-tooltip-border: #e2e8f0;
+  --chart-tooltip-text:   #0f172a;
+  --chart-tooltip-item:   #475569;
+
+  /* Inputs */
+  --input-bg:        #ffffff;
+  --input-border:    #cbd5e1;
+  --input-text:      #0f172a;
+  --input-placeholder: #94a3b8;
+  --input-focus-ring: #2563eb;
+
+  /* Skeleton */
+  --skeleton-bg:     #e2e8f0;
+
+  /* Scrollbar */
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-thumb: #cbd5e1;
+
+  /* Card shadow */
+  --card-shadow:     0 2px 12px rgba(0,0,0,0.08);
+  --card-shadow-hover: 0 4px 20px rgba(0,0,0,0.12);
+
+  /* Accent glow */
+  --accent-glow:     rgba(37,99,235,0.15);
+}

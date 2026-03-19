@@ -1,0 +1,29 @@
+const mongoose = require('mongoose');
+
+const targetSchema = new mongoose.Schema({
+  userId:      { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  name:        { type: String, required: true, trim: true },
+  url:         { type: String, required: true, trim: true },
+  description: { type: String, default: '' },
+  tags:        { type: [String], default: [] },
+  // Scheduling
+  schedule: {
+    enabled:   { type: Boolean, default: false },
+    frequency: { type: String, enum: ['daily', 'weekly', 'monthly'], default: 'weekly' },
+    nextRunAt: { type: Date, default: null },
+    lastRunAt: { type: Date, default: null }
+  },
+  // Alert preferences
+  alerts: {
+    email:       { type: Boolean, default: true },
+    slack:       { type: Boolean, default: false },
+    minSeverity: { type: String, enum: ['critical', 'high', 'medium', 'low'], default: 'high' }
+  },
+  lastScanId:    { type: mongoose.Schema.Types.ObjectId, ref: 'Scan', default: null },
+  lastRiskScore: { type: Number, default: null }
+}, { timestamps: true });
+
+targetSchema.index({ userId: 1 });
+targetSchema.index({ 'schedule.enabled': 1, 'schedule.nextRunAt': 1 });
+
+module.exports = mongoose.model('Target', targetSchema);

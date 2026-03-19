@@ -1,0 +1,1 @@
+// Scanner base class
